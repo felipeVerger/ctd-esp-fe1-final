@@ -1,3 +1,7 @@
+.container-personaje {
+  display: flex;
+}
+
 .tarjeta-personaje {
   display: flex;
   flex-direction: column;
