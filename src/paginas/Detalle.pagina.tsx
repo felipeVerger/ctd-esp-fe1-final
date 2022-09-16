@@ -1,7 +1,10 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
+import { useParams } from "react-router-dom";
 import BotonFavorito from "../componentes/botones/boton-favorito.componente";
 import TarjetaEpisodio from "../componentes/episodios/tarjeta-episodio.componente";
+import { getCharacterById } from "../service/service";
+import { Character } from "../types/characters.type";
 
 import "./Detalle.css";
 
@@ -18,27 +21,49 @@ import "./Detalle.css";
  * @returns la pagina de detalle
  */
 const PaginaDetalle:FC = () => {
-    return <div className="container">
-        <h3>Rick Sanchez</h3>
+    const [character, setCharacter] = useState<Character>();
+    const { id }: any = useParams();
+
+    useEffect(() => {
+        getCharacterById(id).then((data) => {
+            setCharacter(data);
+        })
+    }, [id])
+    
+    console.log(character);
+
+    return (
+    <div className="container">
+        <h3>{character?.name}</h3>
         <div className={"detalle"}>
             <div className={"detalle-header"}>
-                <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez"/>
+                <img src={character?.image} alt={character?.name}/>
                 <div className={"detalle-header-texto"}>
 
-                    <p>Rick Sanchez</p>
-                    <p>Planeta: Earth</p>
-                    <p>Genero: Male</p>
+                    <p>{character?.name}</p>
+                    <p>Planeta: {character?.origin?.name}</p>
+                    <p>Genero: {character?.gender}</p>
                 </div>
                 <BotonFavorito esFavorito={false} />
             </div>
         </div>
         <h4>Lista de episodios donde apareció el personaje</h4>
         <div className={"episodios-grilla"}>
+            {character?.episode?.map((episode) => (
+                <div className="tarjeta-episodio">
+                    <h4>{episode}</h4>
+                    <div>
+                        <span>S01E01</span>
+                        <span>Lanzado el: April 7, 2014</span>
+                    </div>
+                </div>
+            ))}
+            {/* <TarjetaEpisodio />
             <TarjetaEpisodio />
-            <TarjetaEpisodio />
-            <TarjetaEpisodio />
+            <TarjetaEpisodio /> */}
         </div>
     </div>
+    )
 }
 
 export default PaginaDetalle

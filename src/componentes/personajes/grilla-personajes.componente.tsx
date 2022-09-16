@@ -1,10 +1,6 @@
-import { FC, useEffect, useState } from 'react';
-import { TypedUseSelectorHook, useDispatch } from 'react-redux';
-import { searchCharactersAPI } from '../../service/service';
+import { FC } from 'react';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
-import { GlobalState, useSelector as useReduxSelector } from '../../redux/store';
-import { Character } from '../../types/characters.type'
 
 
 /**

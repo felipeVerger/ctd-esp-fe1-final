@@ -1,11 +1,10 @@
 import {FC} from 'react';
 import { searchCharactersThunk } from '../../redux/actions/characters.actions';
-import { TypedUseSelectorHook, useDispatch, useSelector as useReduxSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../../redux/store';
 
 import './filtros.css';
-import { GlobalState } from '../../redux/store';
 
-export const useSelector: TypedUseSelectorHook<GlobalState> = useReduxSelector;
 
 const Filtros:FC = () => {
 

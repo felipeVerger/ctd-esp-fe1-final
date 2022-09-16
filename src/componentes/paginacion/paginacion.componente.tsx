@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { TypedUseSelectorHook, useDispatch, useSelector as useReduxSelector } from 'react-redux';
-import { changePage, fetchCharactersThunk } from '../../redux/actions/characters.actions';
-import { GlobalState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { changePage } from '../../redux/actions/characters.actions';
+import { useSelector } from '../../redux/store';
+
 
 import './paginacion.css';
 
-export const useSelector: TypedUseSelectorHook<GlobalState> = useReduxSelector;
 
 /**
  * Componente que contiene los botones para paginar

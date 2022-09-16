@@ -1,11 +1,11 @@
 import {FC, useEffect} from 'react';
-import { TypedUseSelectorHook, useDispatch, useSelector as useReduxSelector } from 'react-redux';
-import { fetchCharactersThunk, searchCharactersThunk } from '../../redux/actions/characters.actions';
-import { GlobalState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { fetchCharactersThunk } from '../../redux/actions/characters.actions';
+import { Link } from 'react-router-dom';
+import { useSelector } from '../../redux/store';
 import BotonFavorito from '../botones/boton-favorito.componente';
-import './tarjeta-personaje.css';
 
-export const useSelector: TypedUseSelectorHook<GlobalState> = useReduxSelector;
+import './tarjeta-personaje.css';
 
 /**
  * Tarjeta para cada personaje dentro de la grilla de personajes. 
@@ -44,7 +44,7 @@ const TarjetaPersonaje:FC = () => {
     return (
       <div className="tarjeta-personaje">
         {characters.map((character) => (
-          <div key={character.id}>
+          <Link to={`/detalle/${character.id}`} key={character.id}>
             <img
               src={character.image}
               alt="Rick Sanchez"
@@ -53,7 +53,7 @@ const TarjetaPersonaje:FC = () => {
               <span>{character.name}</span>
               <BotonFavorito esFavorito={false}/>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     );
