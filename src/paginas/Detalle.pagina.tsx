@@ -22,6 +22,7 @@ import "./Detalle.css";
  */
 const PaginaDetalle:FC = () => {
     const [character, setCharacter] = useState<Character>();
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const { id }: any = useParams();
 
     useEffect(() => {
@@ -29,8 +30,7 @@ const PaginaDetalle:FC = () => {
             setCharacter(data);
         })
     }, [id])
-    
-    console.log(character);
+
 
     return (
     <div className="container">
@@ -44,13 +44,13 @@ const PaginaDetalle:FC = () => {
                     <p>Planeta: {character?.origin?.name}</p>
                     <p>Genero: {character?.gender}</p>
                 </div>
-                <BotonFavorito esFavorito={false} />
+                <BotonFavorito isFavorite={isFavorite} onClick={setIsFavorite} character={character}/>
             </div>
         </div>
         <h4>Lista de episodios donde apareció el personaje</h4>
         <div className={"episodios-grilla"}>
-            {character?.episode?.map((episode) => (
-                <div className="tarjeta-episodio">
+            {character?.episode?.map((episode, index) => (
+                <div className="tarjeta-episodio" key={index}>
                     <h4>{episode}</h4>
                     <div>
                         <span>S01E01</span>

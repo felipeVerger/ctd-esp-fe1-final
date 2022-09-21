@@ -43,8 +43,25 @@ export interface ResetSearchAction extends Action {
 
 export interface AddToFavoritesAction extends Action {
     type: 'ADD_TO_FAVORITES',
-    payload: []
+    payload: Character
 }
+
+export interface RemoveFromFavoritesAction extends Action {
+    type: 'REMOVE_FROM_FAVORITES',
+    payload: Character
+}
+
+export interface RemoveAllFromFavoritesAction extends Action {
+    type: 'REMOVE_ALL_FROM_FAVORITES',
+}
+
+// export interface isFavoriteAction extends Action {
+//     type: 'IS_FAVORITE',
+//     payload: {
+//         id: number,
+//         isFavorite: boolean
+//     }
+// }
 
 /**
  * we export all actions in these object
@@ -58,4 +75,6 @@ export interface AddToFavoritesAction extends Action {
  | SearchCharactersSuccessAction 
  | SearchCharactersErrorAction
  | ResetSearchAction
- | AddToFavoritesAction;
+ | AddToFavoritesAction
+ | RemoveFromFavoritesAction
+ | RemoveAllFromFavoritesAction;

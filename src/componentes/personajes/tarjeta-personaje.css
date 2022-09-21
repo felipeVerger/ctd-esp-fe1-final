@@ -1,6 +1,11 @@
-.container-personaje {
+/* .tarjeta-container {
   display: flex;
-}
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+} */
 
 .tarjeta-personaje {
   display: flex;

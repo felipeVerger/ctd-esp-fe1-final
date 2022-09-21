@@ -1,6 +1,6 @@
 import { ActionCreator, ThunkAction} from '@reduxjs/toolkit'
 import { getAllCharacters, searchCharactersAPI } from '../../service/service'
-import { AddToFavoritesAction, ChangePageAction, CharactersActions, InitialFetchOfCharactersAction, InitialFetchOfCharactersErrorAction, InitialFetchOfCharactersSuccessAction, ResetSearchAction, SearchCharactersAction, SearchCharactersErrorAction, SearchCharactersSuccessAction } from '../../types/characters.actions'
+import { AddToFavoritesAction, ChangePageAction, CharactersActions, InitialFetchOfCharactersAction, InitialFetchOfCharactersErrorAction, InitialFetchOfCharactersSuccessAction, RemoveAllFromFavoritesAction, RemoveFromFavoritesAction, ResetSearchAction, SearchCharactersAction, SearchCharactersErrorAction, SearchCharactersSuccessAction } from '../../types/characters.actions'
 import { Character } from '../../types/characters.type'
 import { GlobalState } from '../store'
 
@@ -59,15 +59,33 @@ export const resetSearch: ActionCreator<ResetSearchAction> = () => {
     }
 }
 
-export const addCharacterToFavorites: ActionCreator<AddToFavoritesAction> = (character: []) => {
+export const addCharacterToFavorites: ActionCreator<AddToFavoritesAction> = (character: Character) => {
     return {
         type: 'ADD_TO_FAVORITES',
         payload: character
     }
 }
 
+export const removeCharacterFromFavorites: ActionCreator<RemoveFromFavoritesAction> = (character: Character) => {
+    return {
+        type: 'REMOVE_FROM_FAVORITES',
+        payload: character
+    }
+}
+
+export const removeAllCharactersFromFavorites: ActionCreator<RemoveAllFromFavoritesAction> = () => {
+    return {
+        type: 'REMOVE_ALL_FROM_FAVORITES',
+    }
+}
+
 interface SearchCharactersThunkAction extends ThunkAction<void, GlobalState, unknown, CharactersActions>{};
 
+/**
+ * It's a function that returns a function 
+ * @param {number} page - number - the page number to fetch
+ * @returns A function that takes dispatch and getState as arguments.
+ */
 export const fetchCharactersThunk = (page: number): SearchCharactersThunkAction => {
     return async (dispatch, getState) => {
         dispatch(initialFetchCharacters(page))
@@ -80,6 +98,11 @@ export const fetchCharactersThunk = (page: number): SearchCharactersThunkAction 
     }
 }
 
+/**
+ * It's a function that returns a function 
+ * @param {string} search - string - the search string
+ * @returns A function that takes dispatch and getState as arguments.
+ */
 export const searchCharactersThunk = (search: string): SearchCharactersThunkAction => {
     return async (dispatch, getState) => {
         dispatch(searchCharacters(search));

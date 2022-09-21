@@ -1,6 +1,9 @@
-import { FC } from 'react';
-import './grilla-personajes.css';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchCharactersThunk } from '../../redux/actions/characters.actions';
+import { useSelector } from '../../redux/store';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
+import './grilla-personajes.css';
 
 
 /**
@@ -13,9 +16,19 @@ import TarjetaPersonaje from './tarjeta-personaje.componente';
  */
 const GrillaPersonajes:FC = () => {
 
+    const { search, status, characters, page, favorites } = useSelector(state => state.characters);
+    const dispatch = useDispatch();
+    
+
+    useEffect(() => {
+        if (!search){
+          dispatch(fetchCharactersThunk(page))
+        }
+      }, [search, page])
+
     return (
         <div className="grilla-personajes">
-            <TarjetaPersonaje />
+            <TarjetaPersonaje characters={characters} status={status} favorites={favorites} />
         </div>
     )
 }

@@ -9,7 +9,8 @@ export interface CharactersState {
     page: number;
     characters: Character[];
     status: 'idle' | 'loading' | 'success' | 'failed';
-    favorites: [];
+    favorites: Character[];
+    // isFavorite: number[];
 }
 
 const initialState: CharactersState = {
@@ -17,7 +18,8 @@ const initialState: CharactersState = {
     page: 1,
     characters: [],
     status: 'idle',
-    favorites: []
+    favorites: [],
+    // isFavorite: []
 }
 
 const charactersReducer: Reducer<CharactersState, CharactersActions> = (state = initialState, action) => {
@@ -68,11 +70,22 @@ const charactersReducer: Reducer<CharactersState, CharactersActions> = (state = 
                 ...state,
                 search: ''
             }
-        // case 'ADD_TO_FAVORITES': 
-        //     return {
-        //         ...state,
-        //         favorites: [...state.favorites, action.payload]
-        //     }
+        case 'ADD_TO_FAVORITES': 
+            return {
+                ...state,
+                favorites: [action.payload, ...state.favorites.filter(character => character.id !== action.payload.id)],
+                // isFavorite: [...state.isFavorite, action.payload.id]
+            }
+        case 'REMOVE_FROM_FAVORITES':
+            return {
+                ...state,
+                favorites: state.favorites.filter(character => character.id !== action.payload.id)
+            }
+        case 'REMOVE_ALL_FROM_FAVORITES':
+            return {
+                ...state,
+                favorites: []
+            }
         default:
             return state
     }
