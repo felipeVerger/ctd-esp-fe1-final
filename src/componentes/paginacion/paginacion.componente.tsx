@@ -20,6 +20,12 @@ const Paginacion:FC = () => {
     const { page } = useSelector(state => state.characters);
     const dispatch = useDispatch();
 
+    /**
+     * Funcion que se ejecuta cuando se hace click en el boton de pagina siguiente
+     * si el argumento que recibe es prev entonces se debe restar 1 a la pagina actual
+     * si el argumento que recibe es next entonces se debe sumar 1 a la pagina actual
+     * @param arg: string 
+     */
     const handlePage = (arg: string) => {
         if (arg === 'prev' && page >= 0) {
             dispatch(changePage(page - 1))

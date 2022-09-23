@@ -19,9 +19,10 @@ interface IEpisodeProps {
 const TarjetaEpisodio:FC<IEpisodeProps> = ({ episode }) => {
     const [episodeData, setEpisodeData] = useState<Episode>();
 
-    // obtener el id al final del string de todos los episodios
+    /**obtener el id al final del string de todos los episodios */
     const episodeId: string | undefined = episode.split('/').pop();
     
+    /**cuando el componente se monta se hace un llamado a la api de episodios de rick y morty pasandole el id del episodio a la funcion*/
     useEffect(() => {
         getEpisodes(episodeId).then((data) => {
             setEpisodeData(data);

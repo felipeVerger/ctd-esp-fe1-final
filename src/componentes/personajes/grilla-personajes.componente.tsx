@@ -19,6 +19,7 @@ const GrillaPersonajes:FC = () => {
     const { search, status, characters, page, favorites } = useSelector(state => state.characters);
     const dispatch = useDispatch();
     
+    /**si la busqueda o la pagina cambian se hace un llamado a la API*/
     useEffect(() => {
         if (!search){
           dispatch(fetchCharactersThunk(page))

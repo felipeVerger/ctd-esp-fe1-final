@@ -75,9 +75,9 @@ export const removeAllCharactersFromFavorites: ActionCreator<RemoveAllFromFavori
 interface SearchCharactersThunkAction extends ThunkAction<void, GlobalState, unknown, CharactersActions>{};
 
 /**
- * It's a function that returns a function 
- * @param {number} page - number - the page number to fetch
- * @returns A function that takes dispatch and getState as arguments.
+ * Funcion que retorna una funcion
+ * @param {number} page - number - ¿Que pagina se quiere buscar?
+ * @returns una funcion asincrona que hace un fetch a la API, y despacha las acciones correspondientes
  */
 export const fetchCharactersThunk = (page: number): SearchCharactersThunkAction => {
     return async (dispatch, getState) => {
@@ -92,9 +92,9 @@ export const fetchCharactersThunk = (page: number): SearchCharactersThunkAction 
 }
 
 /**
- * It's a function that returns a function 
- * @param {string} search - string - the search string
- * @returns A function that takes dispatch and getState as arguments.
+ * Funcion que retorna una funcion
+ * @param {string} search - string - ¿Que personaje se quiere buscar?
+ * @returns una funcion asincrona que hace un fetch a la API, y despacha las acciones correspondientes
  */
 export const searchCharactersThunk = (search: string): SearchCharactersThunkAction => {
     return async (dispatch, getState) => {

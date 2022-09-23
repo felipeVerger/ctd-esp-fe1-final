@@ -24,6 +24,7 @@ const PaginaDetalle:FC = () => {
     const [character, setCharacter] = useState<Character>();
     const { id }: any = useParams();
 
+    /* A hook that is called when the component is mounted and when the id changes. */
     useEffect(() => {
         getCharacterById(id).then((data) => {
             setCharacter(data);

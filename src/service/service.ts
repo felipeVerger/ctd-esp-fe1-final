@@ -1,18 +1,9 @@
 import { Character, Episode } from "../types/characters.type";
 
 /**
- * It takes a string as an argument, makes a request to the Rick and Morty API, and returns an array of
- * characters.
- * 
- * We use the await keyword to wait for the response from the API.
- * 
- * We use the await keyword to wait for the response to be converted to JSON.
- * 
- * We return the results from the JSON response.
- * 
- * We can use this function in our React app like this:
- * @param {string} search - string - The search term to use to find characters
- * @returns An array of characters.
+ * Toma un string como argumento, hace un fetch a Rick y Morty API, y retorna un array de personajes
+ * @param {string} search - string - La busqueda del input para buscar un personaje
+ * @returns Un array de personajes.
  */
 export const searchCharactersAPI = async (search: string): Promise<Character[]> => {
     const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${search}`);
@@ -21,10 +12,9 @@ export const searchCharactersAPI = async (search: string): Promise<Character[]> 
 }
 
 /**
- * It takes a page number as an argument, fetches the data from the API, and returns an array of
- * characters
- * @param {number} page - number - The page number you want to get.
- * @returns An array of characters
+ * Toma la pagina comoa argumento, hace un fetch a la API, y retorna un array de personajes
+ * @param {number} page - number - el numero de pagina.
+ * @returns array de personajes
  */
 export const getAllCharacters = async (page: number): Promise<Character[]> => {
     const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}`);
@@ -33,10 +23,9 @@ export const getAllCharacters = async (page: number): Promise<Character[]> => {
 }
 
 /**
- * It takes a number as an argument, makes a request to the Rick and Morty API, and returns a character
- * object
+ * Toma un number como argumento que es el id del personaje, hace un fetch, y retorna un objeto personaje
  * @param {number} characterId - number
- * @returns A promise that resolves to a character object.
+ * @returns la informacion de un personaje.
  */
 export const getCharacterById = async (characterId: number): Promise<Character> => {
     const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
@@ -45,9 +34,9 @@ export const getCharacterById = async (characterId: number): Promise<Character> 
 }
 
 /**
- * It takes an id as a parameter, fetches the data from the API, and returns the data as a promise
+ * Toma un id como parametro, hace un fetch a la data de la API, y devuleve la data
  * @param {string | undefined} id - string | undefined
- * @returns An object with the following properties:
+ * @returns devuelve un objeto con las siguientes propiedades:
  * id: number
  * name: string
  * air_date: string

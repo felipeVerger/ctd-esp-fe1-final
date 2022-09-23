@@ -23,14 +23,13 @@ const BotonFavorito:FC<IFavoriteProps> = ({ character }) => {
     const dispatch = useDispatch();
 
     /**
-     * When the user clicks the favorite button, dispatch the toggleFavorites action with the character
-     * as the payload.
+     * Cuando el usuario hace click en el boton de favorito, despacha la accion toggleFavorites con el personaje
      */
     const handleFavorite = () => {
         dispatch(toggleFavorites(character));
     }
 
-    /* It's checking if the character is in the favorites list. */
+    /* Checkea si el personaje esta en la lista de favoritos, si esta devuelve true, de lo cobtrario false */
     const checkIsFavorite = favorites.find(favorite => favorite.id === character?.id)?.id === character?.id;
     
     const src = checkIsFavorite ? "/imagenes/star-filled.png" : "/imagenes/star.png"
