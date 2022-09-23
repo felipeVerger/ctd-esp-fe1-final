@@ -1,17 +1,16 @@
-import {useState} from 'react';
+import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Character } from '../../types/characters.type';
 
 import BotonFavorito from '../botones/boton-favorito.componente';
 import Loading from '../Loading/Loading';
 
 import './tarjeta-personaje.css';
-import { Character } from '../../types/characters.type';
 
 interface ITarjetaProps {
     characters: Character[],
     status: string,
     favorites: Character[],
-    // isFavorite: [{id: number, isFavorite: boolean}]
 }
 
 /**
@@ -22,9 +21,7 @@ interface ITarjetaProps {
  * 
  * @returns un JSX element 
  */
-const TarjetaPersonaje = ({characters, status, favorites}: ITarjetaProps) => {
-
-    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+const TarjetaPersonaje:FC<ITarjetaProps> = ({characters, status, favorites}) => {
     const location = useLocation().pathname;
     
     return (
@@ -41,7 +38,7 @@ const TarjetaPersonaje = ({characters, status, favorites}: ITarjetaProps) => {
           </Link>
             <div className="tarjeta-personaje-body">
               <span>{character.name}</span>
-              <BotonFavorito isFavorite={isFavorite} onClick={setIsFavorite} character={character} />
+              <BotonFavorito character={character}/>
             </div>
           </div>
         )) :
@@ -55,7 +52,7 @@ const TarjetaPersonaje = ({characters, status, favorites}: ITarjetaProps) => {
             </Link>
               <div className="tarjeta-personaje-body">
                 <span>{character.name}</span>
-                <BotonFavorito isFavorite={isFavorite} onClick={setIsFavorite} character={character}/>
+                <BotonFavorito character={character}/>
               </div>
             </div>
           ))}

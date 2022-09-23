@@ -19,12 +19,12 @@ const GrillaPersonajes:FC = () => {
     const { search, status, characters, page, favorites } = useSelector(state => state.characters);
     const dispatch = useDispatch();
     
-
     useEffect(() => {
         if (!search){
           dispatch(fetchCharactersThunk(page))
         }
       }, [search, page])
+      
 
     return (
         <div className="grilla-personajes">

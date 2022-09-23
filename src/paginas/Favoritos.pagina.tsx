@@ -15,13 +15,14 @@ import { useSelector } from "../redux/store";
 const PaginaFavoritos:FC = () => {
 
     const dispatch = useDispatch();
+    const { favorites } = useSelector(state => state.characters);
 
     return <div className="container">
         <div className="actions">
             <h3>Personajes Favoritos</h3>
             <button className="danger" onClick={() => dispatch(removeAllCharactersFromFavorites())}>Test Button</button>
         </div>
-        <GrillaPersonajes />
+        {favorites.length ? <GrillaPersonajes /> : <h2>No hay favoritos aun</h2>}
     </div>
 }
 

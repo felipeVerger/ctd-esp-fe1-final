@@ -2,7 +2,6 @@ import { Reducer } from "@reduxjs/toolkit";
 import { Character } from "../../types/characters.type";
 import { CharactersActions } from "../../types/characters.actions";
 
-import { loadavg } from "os";
 
 export interface CharactersState {
     search: string;
@@ -10,7 +9,6 @@ export interface CharactersState {
     characters: Character[];
     status: 'idle' | 'loading' | 'success' | 'failed';
     favorites: Character[];
-    // isFavorite: number[];
 }
 
 const initialState: CharactersState = {
@@ -19,7 +17,6 @@ const initialState: CharactersState = {
     characters: [],
     status: 'idle',
     favorites: [],
-    // isFavorite: []
 }
 
 const charactersReducer: Reducer<CharactersState, CharactersActions> = (state = initialState, action) => {
@@ -70,16 +67,10 @@ const charactersReducer: Reducer<CharactersState, CharactersActions> = (state = 
                 ...state,
                 search: ''
             }
-        case 'ADD_TO_FAVORITES': 
+        case 'TOGGLE_FAVORITE':
             return {
                 ...state,
-                favorites: [action.payload, ...state.favorites.filter(character => character.id !== action.payload.id)],
-                // isFavorite: [...state.isFavorite, action.payload.id]
-            }
-        case 'REMOVE_FROM_FAVORITES':
-            return {
-                ...state,
-                favorites: state.favorites.filter(character => character.id !== action.payload.id)
+                favorites: state.favorites.some(character => character.id === action.payload.id) ? state.favorites.filter(character => character.id !== action.payload.id) : [action.payload, ...state.favorites.filter(character => character.id !== action.payload.id)],
             }
         case 'REMOVE_ALL_FROM_FAVORITES':
             return {

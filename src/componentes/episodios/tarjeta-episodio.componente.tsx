@@ -1,6 +1,12 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getEpisodes } from '../../service/service';
+import { Episode } from '../../types/characters.type';
 
 import './tarjeta-episodio.css';
+
+interface IEpisodeProps {
+    episode: string;
+}
 
 /**
  * Tarjeta para cada episodio dentro de la vista de personaje.
@@ -10,15 +16,27 @@ import './tarjeta-episodio.css';
  * 
  * @returns un JSX element 
  */
-const TarjetaEpisodio:FC = () => {
+const TarjetaEpisodio:FC<IEpisodeProps> = ({ episode }) => {
+    const [episodeData, setEpisodeData] = useState<Episode>();
 
-    return <div className="tarjeta-episodio">
-            <h4>Close Rick-counters of the Rick Kind</h4>
-            <div>
-                <span>S01E01</span>
-                <span>Lanzado el: April 7, 2014</span>
-            </div>
-    </div>
+    // obtener el id al final del string de todos los episodios
+    const episodeId: string | undefined = episode.split('/').pop();
+    
+    useEffect(() => {
+        getEpisodes(episodeId).then((data) => {
+            setEpisodeData(data);
+        })
+    }, []);
+    
+    return (
+        <div className="tarjeta-episodio">
+                <h4>{episodeData?.name}</h4>
+                <div>
+                    <span>{episodeData?.episode}</span>
+                    <span>Lanzado el: {episodeData?.air_date}</span>
+                </div>
+        </div>
+    )
 }
 
 export default TarjetaEpisodio;

@@ -1,6 +1,6 @@
 import { ActionCreator, ThunkAction} from '@reduxjs/toolkit'
 import { getAllCharacters, searchCharactersAPI } from '../../service/service'
-import { AddToFavoritesAction, ChangePageAction, CharactersActions, InitialFetchOfCharactersAction, InitialFetchOfCharactersErrorAction, InitialFetchOfCharactersSuccessAction, RemoveAllFromFavoritesAction, RemoveFromFavoritesAction, ResetSearchAction, SearchCharactersAction, SearchCharactersErrorAction, SearchCharactersSuccessAction } from '../../types/characters.actions'
+import {  ChangePageAction, CharactersActions, InitialFetchOfCharactersAction, InitialFetchOfCharactersErrorAction, InitialFetchOfCharactersSuccessAction, RemoveAllFromFavoritesAction, ResetSearchAction, SearchCharactersAction, SearchCharactersErrorAction, SearchCharactersSuccessAction, ToggleFavoriteAction } from '../../types/characters.actions'
 import { Character } from '../../types/characters.type'
 import { GlobalState } from '../store'
 
@@ -59,16 +59,9 @@ export const resetSearch: ActionCreator<ResetSearchAction> = () => {
     }
 }
 
-export const addCharacterToFavorites: ActionCreator<AddToFavoritesAction> = (character: Character) => {
+export const toggleFavorites: ActionCreator<ToggleFavoriteAction> = (character: Character) => {
     return {
-        type: 'ADD_TO_FAVORITES',
-        payload: character
-    }
-}
-
-export const removeCharacterFromFavorites: ActionCreator<RemoveFromFavoritesAction> = (character: Character) => {
-    return {
-        type: 'REMOVE_FROM_FAVORITES',
+        type: 'TOGGLE_FAVORITE',
         payload: character
     }
 }
